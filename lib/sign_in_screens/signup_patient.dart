@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:healthspace_test1/settings_screens/help.dart';
 import 'package:healthspace_test1/settings_screens/help/help_center.dart';
 import 'package:healthspace_test1/sign_in_screens/sign_in.dart';
+import 'package:healthspace_test1/sign_in_screens/sign_up_patent_screen_2.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+
+List<String> items = [
+  "Male" , "Female"
+];
+String dropdownValue = "Male";
 
 class SignUp_Patient extends StatefulWidget {
   const SignUp_Patient({Key? key}) : super(key: key);
@@ -37,8 +44,24 @@ class _SignUp_PatientState extends State<SignUp_Patient> {
             ),
           ),
         ),
+        // Container(
+        //   width: 300,
+        //   height: 50,
+        //   color: Colors.white,
+        //   child: LinearPercentIndicator(
+        //     animation: true,
+        //     animationDuration: 2000,
+        //     barRadius: Radius.circular(15),
+        //     lineHeight: 20,
+        //     percent: 0.0,
+        //     progressColor: Color.fromRGBO(67, 177, 177, 1),
+        //     backgroundColor: Color(0xFF179797),
+        //     curve: Curves.bounceIn,
+        //     center: Text('Progress 0%' ,  style: TextStyle(fontSize: 15.0 , color: Colors.white ,)),
+        //   ),
+        // ),
         Container(
-          height: 2000,
+          height: 1000,
           color: Color(0xFF179797),
           child: MyCustomForm(),
         ),
@@ -88,6 +111,20 @@ class _MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(height: 30,),
+          Center(child: Text('Basic Information' , style: TextStyle(fontSize: 25.0 , color: Colors.white , fontWeight: FontWeight.bold))),
+          SizedBox(height: 10,),
+          LinearPercentIndicator(
+            animation: true,
+            animationDuration: 2000,
+            barRadius: Radius.circular(15),
+            lineHeight: 2,
+            percent: 0.0,
+            progressColor: Color.fromRGBO(67, 177, 177, 1),
+            backgroundColor: Colors.white,
+            curve: Curves.bounceIn,
+            //center: Text('Progress 0%' ,  style: TextStyle(fontSize: 15.0 , color: Colors.white ,)),
+          ),
           // Padding(
           //   padding: const EdgeInsets.fromLTRB(60, 25, 25, 10),
           //   //padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -117,8 +154,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
             //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
             child: TextFormField(
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your name';
+                if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)){
+                  return 'Please Enter Correct Name';
                 }
                 return null;
               },
@@ -142,8 +179,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
             //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
             child: TextFormField(
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter NIC or Drivers license';
+                if (value!.isEmpty || value.length < 9 || !RegExp(r'^[0-9 v V]+$').hasMatch(value!)){
+                  return 'Please Enter correct NIC';
                 }
                 return null;
               },
@@ -184,28 +221,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
             child: TextFormField(
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your gender';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                hintText: 'Gender',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value!.isEmpty || value.length < 10 ||!RegExp(r'^[0-9]+$').hasMatch(value!)) {
                   return 'Please enter your birthday(DD/MM/YYYY)';
                 }
                 return null;
@@ -226,8 +242,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
             //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
             child: TextFormField(
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your age';
+                if (value!.isEmpty || value.length > 2 || !RegExp(r'^[0-9]+$').hasMatch(value!)){
+                  return 'Please Enter correct Age';
                 }
                 return null;
               },
@@ -242,217 +258,48 @@ class _MyCustomFormState extends State<MyCustomForm> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your weight';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
+          SizedBox(height: 10,),
+          SizedBox(width: 12,),
+          Row(
+            children: [
+              SizedBox(width: 60,),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 14 , left: 10) ,
+                  child: Text("Gender" , style: TextStyle(fontSize: 15.0 , color: Colors.black)),
                 ),
-                hintText: 'Weight',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your blood group';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                height: 50,
+                width: 190,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.white
                 ),
-                hintText: 'Blood group',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your deceases';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                hintText: 'Deceases',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
+              SizedBox(width: 10,),
+              DropdownButton<String>(
+                onChanged: (String? newValue){
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                //value: dropdownValue,
+                value: dropdownValue,
+                style: TextStyle(color: Colors.white , fontSize: 20),
+                icon: Icon(Icons.arrow_drop_down , color: Colors.white, size: 40,),
+                dropdownColor: Color(0xFF179797),
+                items: items.map<DropdownMenuItem<String>>(
+                        (String value){
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
               ),
-            ),
+            ],
           ),
+          SizedBox(height: 10,),
           Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter expected organ or equipment';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                hintText: 'Expected organ or equipment',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter hospital';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                hintText: 'Hospital',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              // controller: TextEditingController(text: user.email),
-              // onChanged: (value) {
-              //   user.email = value;
-              // },
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your e-mail';
-                } else if (RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    .hasMatch(value)) {
-                  return null;
-                } else {
-                  return "Enter valid email";
-                }
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                hintText: 'E-mail',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your contact number';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                hintText: 'Contact number',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              obscureText: true,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter password';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                hintText: 'Password',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(60, 10, 25, 10),
-            //padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            child: TextFormField(
-              obscureText: true,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter password again';
-                }
-                return null;
-              },
-              decoration: const InputDecoration(
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                // focusedBorder: OutlineInputBorder(
-                //   borderSide: BorderSide(color: Colors.white),
-                //   borderRadius: BorderRadius.circular(10),
-                // ),
-                // enabledBorder: UnderlineInputBorder(
-                //   borderRadius: BorderRadius.circular(10),
-                // ),
-                hintText: 'Confirm Password',
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                fillColor: Colors.white,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(250, 5, 5, 5),
+            padding: const EdgeInsets.fromLTRB(290, 5, 5, 5),
             //padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 300),
             child: OutlinedButton(
               style: ButtonStyle(
@@ -466,12 +313,12 @@ class _MyCustomFormState extends State<MyCustomForm> {
               ),
               onPressed: () {
                 if (_formKey.currentState!.validate()){
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SignIn()));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SignUp_Patient_Screen_2()));
                 }
                 // Validate returns true if the form is valid, or false otherwise.
               },
               child: const Text(
-                'Submit',
+                'Next',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

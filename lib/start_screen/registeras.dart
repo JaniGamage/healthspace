@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthspace_test1/dashboard/admin_dashboard.dart';
+import 'package:healthspace_test1/sign_in_screens/have_dieses.dart';
 import 'package:healthspace_test1/sign_in_screens/signup_donor.dart';
 import 'package:healthspace_test1/sign_in_screens/signup_hospital.dart';
 import 'package:healthspace_test1/sign_in_screens/signup_organization.dart';
@@ -72,7 +73,7 @@ class _RegisterAsState extends State<RegisterAs> {
                   ),
                   onPressed: () {
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => const SignUp_Donor()));//wenas krnna
+                        context, MaterialPageRoute(builder: (_) => const Havedesies()));//wenas krnna
                   },
                   child: const Text(
                     'Donor',
