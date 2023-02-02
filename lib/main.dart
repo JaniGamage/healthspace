@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:healthspace_test1/feed/feed.dart';
+import 'package:healthspace_test1/settings_screens/account_settings/swith_account.dart';
 import 'package:healthspace_test1/settings_screens/settings.dart';
 import 'package:healthspace_test1/sign_in_screens/have_dieses.dart';
 import 'package:healthspace_test1/sign_in_screens/profile.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      home: GetStarted(),
+      home: SwitchAccount(),
     );
   }
 }

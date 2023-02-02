@@ -12,6 +12,7 @@ class SwitchAccount extends StatefulWidget {
 }
 
 class _SwitchAccountState extends State<SwitchAccount> {
+  int _value = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,17 +41,49 @@ class _SwitchAccountState extends State<SwitchAccount> {
             child: Text('Switch To:' , style: TextStyle(fontSize: 15.0 , color: Colors.white) , textAlign: TextAlign.left,),
           ),
           SizedBox(height: 10.0,),
-          Column(
-            children: [
-              ListTile(
-                title: Text('Donor'),
-                leading: Radio(
-                  value: 1,
-                  groupValue: 1,
-                  onChanged: (value){},
-                ),
-              )
-            ],
+          // Column(
+          //   children: [
+          //     ListTile(
+          //       title: Text('Donor'),
+          //       leading: Radio(
+          //         value: 1,
+          //         groupValue: 1,
+          //         onChanged: (value){},
+          //       ),
+          //     )
+          //   ],
+          // ),
+          Padding(
+            padding: const EdgeInsets.only(left: 120),
+            child: Row(
+              children: [
+                Radio(value: 1,
+                    groupValue: _value,
+                    onChanged: (value){
+                  setState(() {
+                    _value = 1;
+                  });
+                    }),
+                SizedBox(width: 10,),
+                Text("Donor" , style: TextStyle(fontSize: 20.0 , color: Colors.white), textAlign: TextAlign.center ,)
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 120),
+            child: Row(
+              children: [
+                Radio(value: 2,
+                    groupValue: _value,
+                    onChanged: (value){
+                      setState(() {
+                        _value = 2;
+                      });
+                    }),
+                SizedBox(width: 10,),
+                Text("Patient" , style: TextStyle(fontSize: 20.0 , color: Colors.white), textAlign: TextAlign.center ,)
+              ],
+            ),
           ),
           SizedBox(height: 30.0,),
           Text('Fogot Password?' , style: TextStyle(fontSize: 15.0 , color: Colors.white ), textAlign: TextAlign.center ,),
